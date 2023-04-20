@@ -18,7 +18,7 @@
                                 style="color: #000; font-size: 15px;"><i>{{ ucwords($s['address']) }}</i></span></strong>
                     <br/> <br/>
 
-                     <span style="color: #000; font-weight: bold; font-size: 25px;"> PAYMENT RECEIPT</span>
+                     <span style="color: #000; font-weight: bold; font-size: 25px;">RECU DE PAIEMENT</span>
                 </td>
             </tr>
         </table>
@@ -32,7 +32,7 @@
         {{--Receipt No --}}
     <div class="bold arial" style="text-align: center; float:right; width: 200px; padding: 5px; margin-right:30px">
         <div style="padding: 10px 20px; width: 200px; background-color: lightcyan;">
-            <span  style="font-size: 16px;">Receipt Reference No.</span>
+            <span  style="font-size: 16px;">Référence du reçu N°.</span>
         </div>
         <div  style="padding: 10px 20px; width: 200px; background-color: lightyellow;">
             <span  style="font-size: 25px;">{{ $pr->ref_no }}</span>
@@ -43,7 +43,7 @@
 
         {{-- Student Info --}}
         <div style="margin-top:5px; display: block; background-color: rgba(92, 172, 237, 0.12); padding: 5px; ">
-            <span style="font-weight:bold; font-size: 20px; color: #000; padding-left: 10px">STUDENT INFORMATION</span>
+            <span style="font-weight:bold; font-size: 20px; color: #000; padding-left: 10px">INFORMATION DE L'ELEVE</span>
         </div>
 
         {{--Photo--}}
@@ -54,15 +54,15 @@
        <div style="float: left; margin-left: 20px">
            <table style="font-size: 16px" class="td-left" cellspacing="5" cellpadding="5">
                <tr>
-                   <td class="bold">NAME:</td>
+                   <td class="bold">Nom et Prénoms():</td>
                    <td>{{ $sr->user->name }}</td>
                </tr>
                <tr>
-                   <td class="bold">ADM_NO:</td>
+                   <td class="bold">MATRICULE:</td>
                    <td>{{ $sr->adm_no }}</td>
                </tr>
                <tr>
-                   <td class="bold">CLASS:</td>
+                   <td class="bold">CLASSE:</td>
                    <td>{{ $sr->my_class->name }}</td>
                </tr>
            </table>
@@ -71,19 +71,19 @@
 
         {{-- Payment Info --}}
         <div style="margin-top:5px; display: block; background-color: rgba(92, 172, 237, 0.12); padding: 5px; ">
-            <span style="font-weight:bold; font-size: 20px; color: #000; padding-left: 10px">PAYMENT INFORMATION</span>
+            <span style="font-weight:bold; font-size: 20px; color: #000; padding-left: 10px">INFORMATION DE PAIEMENT</span>
         </div>
 
         <table class="td-left" style="font-size: 16px" cellspacing="2" cellpadding="2">
                 <tr>
                     <td class="bold">REFERENCE:</td>
                     <td>{{ $payment->ref_no }}</td>
-                    <td class="bold">TITLE:</td>
+                    <td class="bold">TITRE:</td>
                     <td>{{ $payment->title }}</td>
                 </tr>
                 <tr>
-                    <td class="bold">AMOUNT:</td>
-                    <td>{{ $payment->amount }}</td>
+                    <td class="bold">MONTANT:</td>
+                    <td>{{ $payment->amount }} F cfa</td>
                     <td class="bold">DESCRIPTION:</td>
                     <td>{{ $payment->description }}</td>
                 </tr>
@@ -98,16 +98,16 @@
            <thead>
            <tr>
                <td class="bold">Date</td>
-               <td class="bold">Amount Paid <del style="text-decoration-style: double">N</del></td>
-               <td class="bold">Balance <del style="text-decoration-style: double">N</del></td>
+               <td class="bold">Montant Payé FCFA</td>
+               <td class="bold">Montant Restant FCFA</td>
            </tr>
            </thead>
             <tbody>
             @foreach($receipts as $r)
                 <tr>
                     <td>{{ date('D\, j F\, Y', strtotime($r->created_at)) }}</td>
-                    <td>{{ $r->amt_paid }}</td>
-                    <td>{{ $r->balance }}</td>
+                    <td>{{ $r->amt_paid }} F CFA</td>
+                    <td>{{ $r->balance }} F CFA</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -116,7 +116,7 @@
         <hr>
         <div class="bold arial" style="text-align: center; float:right; width: 200px; padding: 5px; margin-right:30px">
             <div style="padding: 10px 20px; width: 200px; background-color: lightcyan;">
-                <span  style="font-size: 16px;">{{ $pr->paid ? 'PAYMENT STATUS' : 'TOTAL DUE' }}</span>
+                <span  style="font-size: 16px;">{{ $pr->paid ? 'PAYMENT STATUS' : 'TOTAL Dû' }}</span>
             </div>
             <div  style="padding: 10px 20px; width: 200px; background-color: lightyellow;">
                 <span  style="font-size: 25px;">{{ $pr->paid ? 'CLEARED' : $pr->balance }}</span>

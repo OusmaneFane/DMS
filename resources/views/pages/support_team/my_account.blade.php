@@ -24,28 +24,28 @@
                                 @csrf @method('put')
 
                                 <div class="form-group row">
-                                    <label for="current_password" class="col-lg-3 col-form-label font-weight-semibold">Current Password <span class="text-danger">*</span></label>
+                                    <label for="current_password" class="col-lg-3 col-form-label font-weight-semibold">Mot de passe actuel <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <input id="current_password" name="current_password"  required type="password" class="form-control" >
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="password" class="col-lg-3 col-form-label font-weight-semibold">New Password <span class="text-danger">*</span></label>
+                                    <label for="password" class="col-lg-3 col-form-label font-weight-semibold">Nouveau mot de passe <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <input id="password" name="password"  required type="password" class="form-control" >
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="password_confirmation" class="col-lg-3 col-form-label font-weight-semibold">Confirm Password <span class="text-danger">*</span></label>
+                                    <label for="password_confirmation" class="col-lg-3 col-form-label font-weight-semibold">Confirmer le mot de passe<span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <input id="password_confirmation" name="password_confirmation"  required type="password" class="form-control" >
                                     </div>
                                 </div>
 
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-danger">Submit form <i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn btn-danger">Envoyer le formulaire<i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -59,7 +59,7 @@
                                     @csrf @method('put')
 
                                     <div class="form-group row">
-                                        <label for="name" class="col-lg-3 col-form-label font-weight-semibold">Name</label>
+                                        <label for="name" class="col-lg-3 col-form-label font-weight-semibold">Nom</label>
                                         <div class="col-lg-9">
                                             <input disabled="disabled" id="name" class="form-control" type="text" value="{{ $my->name }}">
                                         </div>
@@ -67,7 +67,7 @@
 
                                     @if($my->username)
                                         <div class="form-group row">
-                                            <label for="username" class="col-lg-3 col-form-label font-weight-semibold">Username</label>
+                                            <label for="username" class="col-lg-3 col-form-label font-weight-semibold">Prénom(s)</label>
                                             <div class="col-lg-9">
                                                 <input disabled="disabled" id="username" class="form-control" type="text" value="{{ $my->username }}">
                                             </div>
@@ -76,7 +76,7 @@
                                     @else
 
                                         <div class="form-group row">
-                                            <label for="username" class="col-lg-3 col-form-label font-weight-semibold">Username </label>
+                                            <label for="username" class="col-lg-3 col-form-label font-weight-semibold">Prénom(s) </label>
                                             <div class="col-lg-9">
                                                 <input id="username" name="username"  type="text" class="form-control" >
                                             </div>
@@ -105,7 +105,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="address" class="col-lg-3 col-form-label font-weight-semibold">Address </label>
+                                        <label for="address" class="col-lg-3 col-form-label font-weight-semibold">Addresse </label>
                                         <div class="col-lg-9">
                                             <input id="address" value="{{ $my->address }}" name="address"  type="text"  class="form-control" >
                                         </div>
@@ -119,7 +119,7 @@
                                     </div>
 
                                     <div class="text-right">
-                                        <button type="submit" class="btn btn-danger">Submit form <i class="icon-paperplane ml-2"></i></button>
+                                        <button type="submit" class="btn btn-danger">Envoyer<i class="icon-paperplane ml-2"></i></button>
                                     </div>
                                 </form>
                             </div>

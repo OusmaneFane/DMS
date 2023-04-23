@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('page_title', 'Admit Student')
+@section('page_title', 'Ajouter un(e) élève')
 @section('content')
         <div class="card">
             <div class="card-header bg-white header-elements-inline">
@@ -89,15 +89,15 @@
                             <select onchange="getLGA(this.value)"  data-placeholder="Choose.." class="select-search form-control" name="state_id" id="state_id">
                                 <option value=""></option>
                                 @foreach($states as $st)
-                                    <option {{ (old('state_id') == $st->id ? 'selected' : '') }} value="12">{{ $st->name }}</option>
+                                    <option {{ (old('state_id') == $st->id ? 'selected' : '') }} value="1">{{ $st->name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="col-md-3">
-                            <label for="lga_id">Quartier: <span class="text-danger">*</span></label>
+                            <label for="lga_id">Ville: <span class="text-danger">*</span></label>
                             <select  data-placeholder="Select State First" class="select-search form-control" name="lga_id" id="lga_id">
-                                <option value="12"></option>
+                                <option value="1"></option>
                             </select>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="my_class_id">Class: <span class="text-danger">*</span></label>
+                                <label for="my_class_id">Classe: <span class="text-danger">*</span></label>
                                 <select onchange="getClassSections(this.value)" data-placeholder="Choose..." required name="my_class_id" id="my_class_id" class="select-search form-control">
                                     <option value=""></option>
                                     @foreach($my_classes as $c)
@@ -164,7 +164,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="year_admitted">Year Admitted: <span class="text-danger">*</span></label>
+                                <label for="year_admitted">Année D'admission: <span class="text-danger">*</span></label>
                                 <select data-placeholder="Choose..." style="display: none" name="year_admitted" id="year_admitted" class="select-search form-control">
                                     <option value=""></option>
                                     @for($y=date('Y', strtotime('- 10 years')); $y<=date('Y'); $y++)

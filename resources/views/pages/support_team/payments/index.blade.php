@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'Manage Payments')
+@section('page_title', 'Gestion des Paiements')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h5 class="card-title"><i class="icon-cash2 mr-2"></i> Select year</h5>
+            <h5 class="card-title"><i class="icon-cash2 mr-2"></i> Choisissez L'année</h5>
             {!! Qs::getPanelOptions() !!}
         </div>
 
@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="form-group">
-                                    <label for="year" class="col-form-label font-weight-bold">Select Year <span class="text-danger">*</span></label>
+                                    <label for="year" class="col-form-label font-weight-bold">Choisissez L'année<span class="text-danger">*</span></label>
                                     <select data-placeholder="Select Year" required id="year" name="year" class="form-control select">
                                         @foreach($years as $yr)
                                             <option {{ ($selected && $year == $yr->year) ? 'selected' : '' }} value="{{ $yr->year }}">{{ $yr->year }}</option>
@@ -27,7 +27,7 @@
 
                             <div class="col-md-2 mt-4">
                                 <div class="text-right mt-1">
-                                    <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn btn-primary">Envoyer <i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </div>
 
@@ -42,15 +42,15 @@
 @if($selected)
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Manage Payments for {{ $year }} Session</h6>
+            <h6 class="card-title">Gestion des paiements de la session {{ $year }} </h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
-                <li class="nav-item"><a href="#all-payments" class="nav-link active" data-toggle="tab">All Classes</a></li>
+                <li class="nav-item"><a href="#all-payments" class="nav-link active" data-toggle="tab">Toutes les classes</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Class Payments</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Paiments des classes</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         @foreach($my_classes as $mc)
                             <a href="#pc-{{ $mc->id }}" class="dropdown-item" data-toggle="tab">{{ $mc->name }}</a>
@@ -65,11 +65,11 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
-                                <th>Amount</th>
+                                <th>Titre</th>
+                                <th>Montan</th>
                                 <th>Ref_No</th>
-                                <th>Class</th>
-                                <th>Method</th>
+                                <th>Classe</th>
+                                <th>Methode</th>
                                 <th>Info</th>
                                 <th>Action</th>
                             </tr>
@@ -79,7 +79,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $p->title }}</td>
-                                    <td>{{ $p->amount }}</td>
+                                    <td>{{ $p->amount }} F CFA</td>
                                     <td>{{ $p->ref_no }}</td>
                                     <td>{{ $p->my_class_id ? $p->my_class->name : '' }}</td>
                                     <td>{{ ucwords($p->method) }}</td>

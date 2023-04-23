@@ -31,7 +31,7 @@
 
         {{--Receipt No --}}
     <div class="bold arial" style="text-align: center; float:right; width: 200px; padding: 5px; margin-right:30px">
-        <div style="padding: 10px 20px; width: 200px; background-color: lightcyan;">
+        <div style="padding: 10px 20px; width: 200px; background-color: rgb(92, 150, 236);">
             <span  style="font-size: 16px;">Référence du reçu N°.</span>
         </div>
         <div  style="padding: 10px 20px; width: 200px; background-color: lightyellow;">
@@ -115,11 +115,11 @@
 
         <hr>
         <div class="bold arial" style="text-align: center; float:right; width: 200px; padding: 5px; margin-right:30px">
-            <div style="padding: 10px 20px; width: 200px; background-color: lightcyan;">
-                <span  style="font-size: 16px;">{{ $pr->paid ? 'PAYMENT STATUS' : 'TOTAL Dû' }}</span>
+            <div style="padding: 10px 20px; width: 200px; background-color: rgb(92, 150, 236);">
+                <span  style="font-size: 16px;">{{ $pr->paid ? 'PAYMENT STATUS' : 'TOTAL DUE' }}</span>
             </div>
             <div  style="padding: 10px 20px; width: 200px; background-color: lightyellow;">
-                <span  style="font-size: 25px;">{{ $pr->paid ? 'CLEARED' : $pr->balance }}</span>
+                <span  style="font-size: 25px;">{{ $pr->paid ? 'CLEARED' : $pr->balance }} F CFA</span>
             </div>
         </div>
         <div class="clear"></div>

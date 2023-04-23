@@ -93,7 +93,7 @@
                 {{--Manage Students--}}
                 @if(Qs::userIsTeamSAT())
                     <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['students.create', 'students.list', 'students.edit', 'students.show', 'students.promotion', 'students.promotion_manage', 'students.graduated']) ? 'nav-item-expanded nav-item-open' : '' }} ">
-                        <a href="#" class="nav-link"><i class="icon-users"></i> <span> Students</span></a>
+                        <a href="#" class="nav-link"><i class="icon-users"></i> <span> Gestion Elèves</span></a>
 
                         <ul class="nav nav-group-sub" data-submenu-title="Manage Students">
                             {{--Admit Student--}}
@@ -156,7 +156,7 @@
 
                     {{--Manage Subjects--}}
                     <li class="nav-item">
-                        <a href="{{ route('subjects.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index','subjects.edit',]) ? 'active' : '' }}"><i class="icon-pin"></i> <span>Subjects</span></a>
+                        <a href="{{ route('subjects.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index','subjects.edit',]) ? 'active' : '' }}"><i class="icon-pin"></i> <span>Sujets</span></a>
                     </li>
                 @endif
 
@@ -193,10 +193,10 @@
 
                         @if(Qs::userIsTeamSAT())
                             {{--Marks Manage--}}
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('marks.index') }}"
-                                   class="nav-link {{ in_array(Route::currentRouteName(), ['marks.index']) ? 'active' : '' }}">Marks</a>
-                            </li> --}}
+                                   class="nav-link {{ in_array(Route::currentRouteName(), ['marks.index']) ? 'active' : '' }}">Notes Examen</a>
+                            </li>
 
                             {{--Marksheet--}}
                             <li class="nav-item">

@@ -93,7 +93,7 @@
                             @endif
                             @if($sr->user->lga_id)
                             <tr>
-                                <td class="font-weight-bold">Quartier</td>
+                                <td class="font-weight-bold">Ville</td>
                                 <td>{{$sr->user->lga->name }}</td>
                             </tr>
                             @endif

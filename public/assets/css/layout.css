@@ -185,7 +185,7 @@ body {
     background: url(../../../../../../global_assets/images/backgrounds/seamless.png); }
 
 .page-header-dark {
-  background-color: #273246;
+  background-color: #638fe2;
   color: #fff;
   margin-bottom: 1.25rem; }
   .page-header-dark > .breadcrumb > li > a,
@@ -495,7 +495,7 @@ body {
 .sidebar-dark .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light .card[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) .nav-sidebar > .nav-item-open > .nav-link:not(.disabled),
 .sidebar-light .card[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #26A69A;
+  rgb(92, 150, 236);
   color: #fff; }
 
 .sidebar-dark .nav-sidebar .nav-item-header,

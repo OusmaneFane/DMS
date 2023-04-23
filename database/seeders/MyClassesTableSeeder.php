@@ -19,16 +19,16 @@ class MyClassesTableSeeder extends Seeder
         $ct = ClassType::pluck('id')->all();
 
         $data = [
-            ['name' => 'Nursery 1', 'class_type_id' => $ct[2]],
-            ['name' => 'Nursery 2', 'class_type_id' => $ct[2]],
-            ['name' => 'Nursery 3', 'class_type_id' => $ct[2]],
-            ['name' => 'Primary 1', 'class_type_id' => $ct[3]],
-            ['name' => 'Primary 2', 'class_type_id' => $ct[3]],
-            ['name' => 'JSS 2', 'class_type_id' => $ct[4]],
-            ['name' => 'JSS 3', 'class_type_id' => $ct[4]],
-            ['name' => 'SSS 1', 'class_type_id' => $ct[5]],
-            ['name' => 'SSS 2', 'class_type_id' => $ct[5]],
-            ['name' => 'SSS 3', 'class_type_id' => $ct[5]],
+            ['name' => '1ère année', 'class_type_id' => $ct[2]],
+            ['name' => '2ème année', 'class_type_id' => $ct[2]],
+            ['name' => '3ème année', 'class_type_id' => $ct[2]],
+            ['name' => '4ème année', 'class_type_id' => $ct[3]],
+            ['name' => '5ème année', 'class_type_id' => $ct[3]],
+            ['name' => '6ème année', 'class_type_id' => $ct[4]],
+            ['name' => '7ème année', 'class_type_id' => $ct[4]],
+            ['name' => '8ème année', 'class_type_id' => $ct[5]],
+            ['name' => '9ème année', 'class_type_id' => $ct[5]],
+            ['name' => '10ème année', 'class_type_id' => $ct[5]],
             ];
 
         DB::table('my_classes')->insert($data);

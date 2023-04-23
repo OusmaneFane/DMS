@@ -15,9 +15,10 @@
                     <div class="card mb-0">
                         <div class="card-body">
                             <div class="text-center mb-3">
-                                <i class="icon-people icon-2x text-warning-400 border-warning-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
-                                <h5 class="mb-0">Login to your account</h5>
-                                <span class="d-block text-muted">Your credentials</span>
+                                {{-- <i class="icon-people icon-2x text-warning-400 border-warning-400 border-3 rounded-round p-3 mb-3 mt-1"></i> --}}
+                            <img src="/images/FAVdoni.png" alt="">
+                                <h5 class="mb-0">Connectez-vous à votre compte</h5>
+                                <span class="d-block text-muted">Vos identifiants</span>
                             </div>
 
                                 @if ($errors->any())
@@ -45,11 +46,11 @@
                                     </label>
                                 </div>
 
-                                <a href="{{ route('password.request') }}" class="ml-auto">Forgot password?</a>
+                                <a href="{{ route('password.request') }}" class="ml-auto">Mot de passe oublié ?</a>
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 ml-2"></i></button>
+                                <button type="submit" class="btn btn-primary btn-block">Se Connecter<i class="icon-circle-right2 ml-2"></i></button>
                             </div>
 
                            {{-- <div class="form-group">

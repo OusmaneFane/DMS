@@ -16,14 +16,14 @@ class SettingsTableSeeder extends Seeder
         DB::table('settings')->delete();
 
         $data = [
-            ['type' => 'current_session', 'description' => '2018-2019'],
-            ['type' => 'system_title', 'description' => 'CJIA'],
-            ['type' => 'system_name', 'description' => 'CJ INSPIRED ACADEMY'],
-            ['type' => 'term_ends', 'description' => '7/10/2018'],
-            ['type' => 'term_begins', 'description' => '7/10/2018'],
-            ['type' => 'phone', 'description' => '0123456789'],
-            ['type' => 'address', 'description' => '18B North Central Park, Behind Central Square Tourist Center'],
-            ['type' => 'system_email', 'description' => 'cjacademy@cj.com'],
+            ['type' => 'current_session', 'description' => '2022-2023'],
+            ['type' => 'system_title', 'description' => 'DSM'],
+            ['type' => 'system_name', 'description' => 'DONI SCHOOL MANAGEMENT'],
+            ['type' => 'term_ends', 'description' => '7/10/2023'],
+            ['type' => 'term_begins', 'description' => '7/10/2023'],
+            ['type' => 'phone', 'description' => '+223 12345678'],
+            ['type' => 'address', 'description' => 'Missabougou, sur la route du 3è Pont'],
+            ['type' => 'system_email', 'description' => 'support@donitecch.online'],
             ['type' => 'alt_email', 'description' => ''],
             ['type' => 'email_host', 'description' => ''],
             ['type' => 'email_pass', 'description' => ''],

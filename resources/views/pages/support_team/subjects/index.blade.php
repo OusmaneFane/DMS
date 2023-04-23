@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'Manage Subjects')
+@section('page_title', 'Gestion des  Sujets')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Manage Subjects</h6>
+            <h6 class="card-title">Gestion des  Sujets</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
@@ -12,7 +12,7 @@
             <ul class="nav nav-tabs nav-tabs-highlight">
                 <li class="nav-item"><a href="#new-subject" class="nav-link active" data-toggle="tab">Add Subject</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manage Subjects</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Gérer les Sujets</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         @foreach($my_classes as $c)
                             <a href="#c{{ $c->id }}" class="dropdown-item" data-toggle="tab">{{ $c->name }}</a>
@@ -28,21 +28,21 @@
                             <form class="ajax-store" method="post" action="{{ route('subjects.store') }}">
                                 @csrf
                                 <div class="form-group row">
-                                    <label for="name" class="col-lg-3 col-form-label font-weight-semibold">Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="col-lg-3 col-form-label font-weight-semibold">Nom <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <input id="name" name="name" value="{{ old('name') }}" required type="text" class="form-control" placeholder="Name of subject">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="slug" class="col-lg-3 col-form-label font-weight-semibold">Short Name <span class="text-danger">*</span></label>
+                                    <label for="slug" class="col-lg-3 col-form-label font-weight-semibold">Nom court<span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <input id="slug" required name="slug" value="{{ old('slug') }}" type="text" class="form-control" placeholder="Eg. B.Eng">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Select Class <span class="text-danger">*</span></label>
+                                    <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Selectionnez la Classe <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
                                             <option value=""></option>
@@ -54,7 +54,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="teacher_id" class="col-lg-3 col-form-label font-weight-semibold">Teacher <span class="text-danger">*</span></label>
+                                    <label for="teacher_id" class="col-lg-3 col-form-label font-weight-semibold">Enseignant <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <select required data-placeholder="Select Teacher" class="form-control select-search" name="teacher_id" id="teacher_id">
                                             <option value=""></option>
@@ -66,7 +66,7 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-primary">Submit form <i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn btn-primary">SOUMETTRE LE FORMULAIRE<i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -78,10 +78,10 @@
                             <thead>
                             <tr>
                                 <th>S/N</th>
-                                <th>Name</th>
-                                <th>Short Name</th>
-                                <th>Class</th>
-                                <th>Teacher</th>
+                                <th>Nom</th>
+                                <th>Nom court</th>
+                                <th>Classe</th>
+                                <th>Enseignant</th>
                                 <th>Action</th>
                             </tr>
                             </thead>

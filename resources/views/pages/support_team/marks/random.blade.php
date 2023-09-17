@@ -4,8 +4,8 @@
         <thead>
         <tr>
             <th>S/N</th>
-            <th>Name</th>
-            <th>ADM_NO</th>
+            <th>Nom & Prénoms</th>
+            <th>Matricule</th>
             @if($class_type->code == 'J')
                 <th>1ST CA (10)</th>
                 <th>MT CA (20)</th>

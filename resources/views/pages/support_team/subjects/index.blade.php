@@ -4,15 +4,15 @@
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Gestion des  Sujets</h6>
+            <h6 class="card-title">Gestion des  Matières</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
-                <li class="nav-item"><a href="#new-subject" class="nav-link active" data-toggle="tab">Add Subject</a></li>
+                <li class="nav-item"><a href="#new-subject" class="nav-link active" data-toggle="tab">Ajouter une matière</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Gérer les Sujets</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Gérer les matières</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         @foreach($my_classes as $c)
                             <a href="#c{{ $c->id }}" class="dropdown-item" data-toggle="tab">{{ $c->name }}</a>
@@ -30,21 +30,21 @@
                                 <div class="form-group row">
                                     <label for="name" class="col-lg-3 col-form-label font-weight-semibold">Nom <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
-                                        <input id="name" name="name" value="{{ old('name') }}" required type="text" class="form-control" placeholder="Name of subject">
+                                        <input id="name" name="name" value="{{ old('name') }}" required type="text" class="form-control" placeholder="Nom de la matière">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="slug" class="col-lg-3 col-form-label font-weight-semibold">Nom court<span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
-                                        <input id="slug" required name="slug" value="{{ old('slug') }}" type="text" class="form-control" placeholder="Eg. B.Eng">
+                                        <input id="slug" required name="slug" value="{{ old('slug') }}" type="text" class="form-control" placeholder="Nom abrégé">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Selectionnez la Classe <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
-                                        <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
+                                        <select required data-placeholder="Selectionner la  Classe" class="form-control select" name="my_class_id" id="my_class_id">
                                             <option value=""></option>
                                             @foreach($my_classes as $c)
                                                 <option {{ old('my_class_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
@@ -56,7 +56,7 @@
                                 <div class="form-group row">
                                     <label for="teacher_id" class="col-lg-3 col-form-label font-weight-semibold">Enseignant <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
-                                        <select required data-placeholder="Select Teacher" class="form-control select-search" name="teacher_id" id="teacher_id">
+                                        <select required data-placeholder="Selectionner un enseignant" class="form-control select-search" name="teacher_id" id="teacher_id">
                                             <option value=""></option>
                                             @foreach($teachers as $t)
                                                 <option {{ old('teacher_id') == Qs::hash($t->id) ? 'selected' : '' }} value="{{ Qs::hash($t->id) }}">{{ $t->name }}</option>

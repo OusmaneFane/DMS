@@ -156,7 +156,7 @@
 
                     {{--Manage Subjects--}}
                     <li class="nav-item">
-                        <a href="{{ route('subjects.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index','subjects.edit',]) ? 'active' : '' }}"><i class="icon-pin"></i> <span>Sujets</span></a>
+                        <a href="{{ route('subjects.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index','subjects.edit',]) ? 'active' : '' }}"><i class="icon-pin"></i> <span>Matières</span></a>
                     </li>
                 @endif
 
@@ -181,9 +181,9 @@
                             </li>
 
                             {{--Tabulation Sheet--}}
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('marks.tabulation') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['marks.tabulation']) ? 'active' : '' }}">Tabulation Sheet</a>
-                            </li> --}}
+                            </li>
 
                             {{--Marks Batch Fix--}}
                             {{-- <li class="nav-item">
@@ -200,7 +200,7 @@
 
                             {{--Marksheet--}}
                             <li class="nav-item">
-                                <a href="{{ route('marks.bulk') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['marks.bulk', 'marks.show']) ? 'active' : '' }}">Marksheet</a>
+                                <a href="{{ route('marks.bulk') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['marks.bulk', 'marks.show']) ? 'active' : '' }}">Bulletins</a>
                             </li>
 
                             @endif

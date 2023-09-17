@@ -2,14 +2,14 @@
 <table style="width:100%; border-collapse:collapse; ">
     <tbody>
     <tr>
-        <td><strong>NAME:</strong> {{ strtoupper($sr->user->name) }}</td>
-        <td><strong>ADM NO:</strong> {{ $sr->adm_no }}</td>
-        <td><strong>HOUSE:</strong> {{ strtoupper($sr->house) }}</td>
-        <td><strong>CLASS:</strong> {{ strtoupper($my_class->name) }}</td>
+        <td><strong>Nom & Prénom(s):</strong> {{ strtoupper($sr->user->name) }}</td>
+        <td><strong>MATRICULE:</strong> {{ $sr->adm_no }}</td>
+        <td><strong>Adresse:</strong> {{ strtoupper($sr->house) }}</td>
+        <td><strong>CLASSE:</strong> {{ strtoupper($my_class->name) }}</td>
     </tr>
     <tr>
-        <td><strong>REPORT SHEET FOR</strong> {!! strtoupper(Mk::getSuffix($ex->term)) !!} TERM </td>
-        <td><strong>ACADEMIC YEAR:</strong> {{ $ex->year }}</td>
+        <td><strong>RELEVES DE NOTES DU </strong> {!! strtoupper(Mk::getSuffix($ex->term)) !!} TERM </td>
+        <td><strong>ANNEE ACADEMIQUE:</strong> {{ $ex->year }}</td>
         <td><strong>AGE:</strong> {{ $sr->age ?: ($sr->user->dob ? date_diff(date_create($sr->user->dob), date_create('now'))->y : '-') }}</td>
     </tr>
 
@@ -21,12 +21,12 @@
 <table style="width:100%; border-collapse:collapse; border: 1px solid #000; margin: 10px auto;" border="1">
     <thead>
     <tr>
-        <th rowspan="2">SUBJECTS</th>
+        <th rowspan="2">MATIERES</th>
         <th colspan="3">CONTINUOUS ASSESSMENT</th>
-        <th rowspan="2">EXAM<br>(60)</th>
-        <th rowspan="2">FINAL MARKS <br> (100%)</th>
-        <th rowspan="2">GRADE</th>
-        <th rowspan="2">SUBJECT <br> POSITION</th>
+        <th rowspan="2">EXAMEN<br>(60)</th>
+        <th rowspan="2">NOTES FINALES <br> (100%)</th>
+        <th rowspan="2">APPRECIATION</th>
+        <th rowspan="2">CLASSEMENT <br> /MATIERE</th>
 
 
       {{--  @if($ex->term == 3) --}}{{-- 3rd Term --}}{{--
@@ -38,11 +38,11 @@
         <th rowspan="2">GRADE</th>
         @endif--}}
 
-        <th rowspan="2">REMARKS</th>
+        <th rowspan="2">APPRECIATIONS</th>
     </tr>
     <tr>
-        <th>CA1(20)</th>
-        <th>CA2(20)</th>
+        <th>DEV1(20)</th>
+        <th>DEV2(20)</th>
         <th>TOTAL(40)</th>
     </tr>
     </thead>
@@ -75,9 +75,9 @@
         </tr>
     @endforeach
     <tr>
-        <td colspan="3"><strong>TOTAL SCORES OBTAINED: </strong> {{ $exr->total }}</td>
-        <td colspan="3"><strong>FINAL AVERAGE: </strong> {{ $exr->ave }}</td>
-        <td colspan="3"><strong>CLASS AVERAGE: </strong> {{ $exr->class_ave }}</td>
+        <td colspan="3"><strong>TOTAL SCORES OBTENUS: </strong> {{ $exr->total }}</td>
+        <td colspan="3"><strong>MOYENNE FINALE: </strong> {{ $exr->ave }}</td>
+        <td colspan="3"><strong>MOYENNE DE LA CLASSE: </strong> {{ $exr->class_ave }}</td>
     </tr>
     </tbody>
 </table>

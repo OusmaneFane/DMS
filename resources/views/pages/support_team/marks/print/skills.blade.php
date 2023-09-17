@@ -2,7 +2,7 @@
     {{--KEYS TO RATING--}}
     <div style="float: left">
         <br>
-        <strong style="text-decoration: underline;">KEY</strong> <br>
+        <strong style="text-decoration: underline;">INDICATIF</strong> <br>
         <span>5 - Excellent</span> <br>
         <span>4 - Very Good</span> <br>
         <span>3 - Good</span> <br>

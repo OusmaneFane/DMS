@@ -4,11 +4,11 @@
         <thead>
         <tr>
             <th>S/N</th>
-            <th>Name</th>
-            <th>ADM_NO</th>
-            <th>1ST CA (20)</th>
-            <th>2ND CA (20)</th>
-            <th>EXAM (60)</th>
+            <th>Nom & Prénoms</th>
+            <th>Matricule</th>
+            <th>Devoir 1 (20)</th>
+            <th>Devoir 2 (20)</th>
+            <th>EXAMEN (60)</th>
         </tr>
         </thead>
         <tbody>

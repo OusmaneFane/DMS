@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Student Marksheet - {{ $sr->user->name }}</title>
+    <title>Bulletiins de notes de l'élève - {{ $sr->user->name }}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/my_print.css') }}" />
 </head>
 <body>
@@ -16,7 +16,7 @@
                    {{-- <strong><span style="color: #1b0c80; font-size: 20px;">MINNA, NIGER STATE</span></strong><br/>--}}
                     <strong><span
                                 style="color: #000; font-size: 15px;"><i>{{ ucwords($s['address']) }}</i></span></strong><br/>
-                    <strong><span style="color: #000; font-size: 15px;"> REPORT SHEET {{ '('.strtoupper($class_type->name).')' }}
+                    <strong><span style="color: #000; font-size: 15px;"> BULLETIN DE NOTES {{ '('.strtoupper($class_type->name).')' }}
                     </span></strong>
                 </td>
                 <td style="width: 100px; height: 100px; float: left;">

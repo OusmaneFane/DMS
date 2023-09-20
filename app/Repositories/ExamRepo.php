@@ -3,10 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Exam;
-use App\Models\ExamRecord;
-use App\Models\Grade;
 use App\Models\Mark;
+use App\Models\Grade;
 use App\Models\Skill;
+use App\Models\Subject;
+use App\Models\ExamRecord;
 
 class ExamRepo
 {
@@ -15,6 +16,18 @@ class ExamRepo
     {
         return Exam::orderBy('name', 'asc')->orderBy('year', 'desc')->get();
     }
+    public function getSubjectCoefficient($sub_id)
+{
+    // Retrieve the subject coefficient for the specified subject ID
+    $subject = Subject::find($sub_id);
+
+    if ($subject) {
+        return $subject->coefficient;
+    }
+
+    return null; // Handle the case when the subject or coefficient is not available
+}
+
 
     public function getExam($data)
     {

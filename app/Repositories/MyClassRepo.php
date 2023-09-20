@@ -19,6 +19,18 @@ class MyClassRepo
     {
         return MyClass::where($data)->with('section');
     }
+    public function getSubjectCoefficient($sub_id)
+{
+    // Retrieve the subject coefficient for the specified subject ID
+    $subject = Subject::find($sub_id);
+
+    if ($subject) {
+        return $subject->coefficient;
+    }
+
+    return null; // Handle the case when the subject or coefficient is not available
+}
+
 
     public function find($id)
     {

@@ -2,8 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Grade;
 use App\Models\Mark;
+use App\Models\Grade;
+use App\Models\Subject;
 use App\Models\StudentRecord;
 
 class MarkRepo
@@ -106,8 +107,24 @@ class MarkRepo
         $d = [ 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'subject_id' => $sub_id, 'student_id' => $st_id, 'year' => $year ];
         $tex = 'tex'.$exam->term;
 
-        return Mark::where($d)->select($tex)->get()->first()->$tex;
+        // Retrieve the mark for the specified criteria
+        $mark = Mark::where($d)->select($tex)->first();
+
+        // Retrieve the subject coefficient
+        $subjectCoefficient = Subject::find($sub_id)->coefficient;
+
+        // Check if the mark and coefficient are available
+        if ($mark && $subjectCoefficient !== null) {
+            // Calculate the modified mark based on the coefficient
+            $modifiedMark = $mark->$tex * $subjectCoefficient;
+
+            return $modifiedMark;
+        }
+
+        return null; // Handle the case when mark or coefficient is not available
     }
+
+
 
     public function getSubPos($st_id, $exam, $class_id, $sub_id, $year)
     {

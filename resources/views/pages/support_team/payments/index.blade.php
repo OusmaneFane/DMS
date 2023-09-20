@@ -66,11 +66,11 @@
                             <tr>
                                 <th>#</th>
                                 <th>Titre</th>
-                                <th>Montan</th>
+                                <th>Montant</th>
                                 <th>Ref_No</th>
                                 <th>Classe</th>
                                 <th>Methode</th>
-                                <th>Info</th>
+                                <th>Description</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -93,9 +93,9 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left">
                                                     {{--Edit--}}
-                                                <a href="{{ route('payments.edit', $p->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+                                                <a href="{{ route('payments.edit', $p->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Modifier</a>
                                                     {{--Delete--}}
-                                                    <a id="{{ $p->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
+                                                    <a id="{{ $p->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Supprimer</a>
                                                     <form method="post" id="item-delete-{{ $p->id }}" action="{{ route('payments.destroy', $p->id) }}" class="hidden">@csrf @method('delete')</form>
 
                                                 </div>

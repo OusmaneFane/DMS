@@ -74,16 +74,9 @@
                     <tr>
                         <th>#</th>
                         <th>NOM_DES_ELEVES_DANS_LA_CLASSE</th>
-                       @foreach($subjects as $sub)
-                       <th title="{{ $sub->name }}" rowspan="2">{{ strtoupper($sub->slug ?: $sub->name) }}</th>
-                       @endforeach
-                        {{--@if($ex->term == 3)
-                        <th>1ST TERM TOTAL</th>
-                        <th>2ND TERM TOTAL</th>
-                        <th>3RD TERM TOTAL</th>
-                        <th style="color: darkred">CUM Total</th>
-                        <th style="color: darkblue">CUM Average</th>
-                        @endif--}}
+                        @foreach($subjects as $sub)
+                            <th title="{{ $sub->name }}" rowspan="2">{{ strtoupper($sub->slug ?: $sub->name) }}</th>
+                        @endforeach
                         <th style="color: darkred">Total</th>
                         <th style="color: darkblue">Average</th>
                         <th style="color: darkgreen">Position</th>
@@ -94,21 +87,21 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td style="text-align: center">{{ $s->user->name }}</td>
+                            @php
+                                $totalMarks = 0;
+                                $subjectCount = 0;
+                            @endphp
                             @foreach($subjects as $sub)
-                            <td>{{ $marks->where('student_id', $s->user_id)->where('subject_id', $sub->id)->first()->$tex ?? '-' ?: '-' }}</td>
+                                @php
+                                    $mark = $marks->where('student_id', $s->user_id)->where('subject_id', $sub->id)->first()->$tex ?? '-';
+                                    $totalMarks += is_numeric($mark) ? $mark : 0;
+                                    $subjectCount++;
+                                @endphp
+                                <td>{{ $mark ?: '-' }}</td>
                             @endforeach
 
-                            {{--@if($ex->term == 3)
-                                --}}{{--1st term Total--}}{{--
-                            <td>{{ Mk::getTermTotal($s->user_id, 1, $year) ?? '-' }}</td>
-                            --}}{{--2nd Term Total--}}{{--
-                            <td>{{ Mk::getTermTotal($s->user_id, 2, $year) ?? '-' }}</td>
-                            --}}{{--3rd Term total--}}{{--
-                            <td>{{ Mk::getTermTotal($s->user_id, 3, $year) ?? '-' }}</td>
-                            @endif--}}
-
-                            <td style="color: darkred">{{ $exr->where('student_id', $s->user_id)->first()->total ?: '-' }}</td>
-                            <td style="color: darkblue">{{ $exr->where('student_id', $s->user_id)->first()->ave ?: '-' }}</td>
+                            <td style="color: darkred">{{ $totalMarks }}</td>
+                            <td style="color: darkblue">{{ $subjectCount > 0 ? number_format($totalMarks / $subjectCount, 2) : '-' }}</td>
                             <td style="color: darkgreen">{!! Mk::getSuffix($exr->where('student_id', $s->user_id)->first()->pos) ?: '-' !!}</td>
                         </tr>
                     @endforeach

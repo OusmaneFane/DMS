@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
-use App\Helpers\Qs;
 use App\Helpers\Mk;
-use App\Http\Requests\Mark\MarkSelector;
+use App\Helpers\Qs;
+use App\Models\Exam;
 use App\Models\Setting;
+use App\Models\Subject;
+use Illuminate\Http\Request;
 use App\Repositories\ExamRepo;
 use App\Repositories\MarkRepo;
 use App\Repositories\MyClassRepo;
-use App\Http\Controllers\Controller;
 use App\Repositories\StudentRepo;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Mark\MarkSelector;
 
 class MarkController extends Controller
 {
@@ -55,7 +57,17 @@ class MarkController extends Controller
         $student_id = Qs::hash($student_id);
         return redirect()->route('marks.show', [$student_id, $req->year]);
     }
+    public function getSubjectCoefficient($sub_id)
+    {
+        // Retrieve the subject coefficient for the specified subject ID
+        $subject = Subject::find($sub_id);
 
+        if ($subject) {
+            return $subject->coefficient;
+        }
+
+        return null; // Handle the case when the subject or coefficient is not available
+    }
     public function show($student_id, $year)
     {
         /* Prevent Other Students/Parents from viewing Result of others */
@@ -75,7 +87,7 @@ class MarkController extends Controller
             return $this->noStudentRecord();
         }
 
-        $wh = ['student_id' => $student_id, 'year' => $year ];
+        $wh = ['student_id' => $student_id, 'year' => $year];
         $d['marks'] = $this->exam->getMark($wh);
         $d['exam_records'] = $exr = $this->exam->getRecord($wh);
         $d['exams'] = $this->exam->getExam(['year' => $year]);
@@ -86,11 +98,49 @@ class MarkController extends Controller
         $d['year'] = $year;
         $d['student_id'] = $student_id;
         $d['skills'] = $this->exam->getSkillByClassType() ?: NULL;
-        //$d['ct'] = $d['class_type']->code;
-        //$d['mark_type'] = Qs::getMarkType($d['ct']);
+        $ex = Exam::where('year', $year)->first();
+
+        if (!$ex) {
+            // Handle the case where the exam record for the year is not found
+            return $this->noStudentRecord();
+        }
+
+ // Calculate the overall weighted average based on subject coefficients
+ $overallTotal = 0;
+ $overallCoefficientTotal = 0;
+
+ foreach ($d['subjects'] as $sub) {
+     foreach ($d['marks']->where('subject_id', $sub->id)->where('exam_id', $ex->id) as $mk) {
+         $total = ($mk->t1 + $mk->t2 + ($mk->exm * $sub->coefficient)) ?: 0;
+         $overallTotal += $total; // Accumulate the weighted total
+         $overallCoefficientTotal += $sub->coefficient + 2;
+
+     }
+ }
+
+ $overallAverage = ($overallCoefficientTotal > 0) ? number_format($overallTotal / $overallCoefficientTotal, 2) : 0;
+
+ // Pass the overall average to the view
+ $d['overallAverage'] = $overallAverage;
+
+        if ($mc) {
+            $d['class_type'] = $this->my_class->findTypeByClass($mc->id);
+            $d['subjects'] = $this->my_class->findSubjectByClass($mc->id);
+        } else {
+            // Handle the case where $mc is null (class not found)
+            // You might want to return an error message or redirect to an error page.
+            return redirect(route('dashboard'))->with('pop_error', __('msg.class_not_found'));
+        }
+
+        $d['year'] = $year;
+        $d['student_id'] = $student_id;
+        $d['skills'] = $this->exam->getSkillByClassType() ?: NULL;
 
         return view('pages.support_team.marks.show.index', $d);
     }
+
+
+
 
     public function print_view($student_id, $exam_id, $year)
     {
@@ -182,81 +232,66 @@ class MarkController extends Controller
     }
 
     public function update(Request $req, $exam_id, $class_id, $section_id, $subject_id)
-    {
-        $p = ['exam_id' => $exam_id, 'my_class_id' => $class_id, 'section_id' => $section_id, 'subject_id' => $subject_id, 'year' => $this->year];
+{
+    $p = ['exam_id' => $exam_id, 'my_class_id' => $class_id, 'section_id' => $section_id, 'subject_id' => $subject_id, 'year' => $this->year];
 
-        $d = $d3 = $all_st_ids = [];
+    // Retrieve the coefficient for the subject
+    $subjectCoefficient = $this->my_class->getSubjectCoefficient($subject_id);
 
-        $exam = $this->exam->find($exam_id);
-        $marks = $this->exam->getMark($p);
-        $class_type = $this->my_class->findTypeByClass($class_id);
+    $d = $d3 = $all_st_ids = [];
 
-        $mks = $req->all();
+    $exam = $this->exam->find($exam_id);
+    $marks = $this->exam->getMark($p);
+    $class_type = $this->my_class->findTypeByClass($class_id);
 
-        /** Test, Exam, Grade **/
-        foreach($marks->sortBy('user.name') as $mk)
-        {
-            $all_st_ids[] = $mk->student_id;
+    $mks = $req->all();
 
-                $d['t1'] = $t1 = $mks['t1_'.$mk->id];
-                $d['t2'] = $t2 = $mks['t2_'.$mk->id];
-                $d['tca'] = $tca = $t1 + $t2;
-                $d['exm'] = $exm = $mks['exm_'.$mk->id];
+    /** Test, Exam, Grade **/
+    foreach ($marks->sortBy('user.name') as $mk) {
+        $all_st_ids[] = $mk->student_id;
 
+        $d['t1'] = $t1 = $mks['t1_' . $mk->id];
+        $d['t2'] = $t2 = $mks['t2_' . $mk->id];
+        $d['exm'] = $exm = $mks['exm_' . $mk->id];
 
-            /** SubTotal Grade, Remark, Cum, CumAvg**/
+        /** Calculate the average using the formula **/
+        $average = ($t1 + $t2 + ($exm * $subjectCoefficient)) / (2 + $subjectCoefficient);
 
-            $d['tex'.$exam->term] = $total = $tca + $exm;
+        /** Update the database with the calculated average **/
+        $d['tex' . $exam->term] = $average;
 
-            if($total > 100){
-                $d['tex'.$exam->term] = $d['t1'] = $d['t2'] = $d['t3'] = $d['t4'] = $d['tca'] = $d['exm'] = NULL;
-            }
-
-         /*   if($exam->term < 3){
-                $grade = $this->mark->getGrade($total, $class_type->id);
-            }
-
-            if($exam->term == 3){
-                $d['cum'] = $this->mark->getSubCumTotal($total, $st_id, $subject_id, $class_id, $this->year);
-                $d['cum_ave'] = $cav = $this->mark->getSubCumAvg($total, $st_id, $subject_id, $class_id, $this->year);
-                $grade = $this->mark->getGrade(round($cav), $class_type->id);
-            }*/
-            $grade = $this->mark->getGrade($total, $class_type->id);
-            $d['grade_id'] = $grade ? $grade->id : NULL;
-
-            $this->exam->updateMark($mk->id, $d);
+        if ($average > 100) {
+            $d['tex' . $exam->term] = $d['t1'] = $d['t2'] = $d['t3'] = $d['t4'] = $d['exm'] = NULL;
         }
 
-        /** Sub Position Begin  **/
+        $grade = $this->mark->getGrade($average, $class_type->id);
+        $d['grade_id'] = $grade ? $grade->id : NULL;
 
-        foreach($marks->sortBy('user.name') as $mk)
-        {
-
-            $d2['sub_pos'] = $this->mark->getSubPos($mk->student_id, $exam, $class_id, $subject_id, $this->year);
-
-            $this->exam->updateMark($mk->id, $d2);
-        }
-
-        /*Sub Position End*/
-
-        /* Exam Record Update */
-
-        unset( $p['subject_id'] );
-
-        foreach ($all_st_ids as $st_id) {
-
-            $p['student_id'] =$st_id;
-            $d3['total'] = $this->mark->getExamTotalTerm($exam, $st_id, $class_id, $this->year);
-            $d3['ave'] = $this->mark->getExamAvgTerm($exam, $st_id, $class_id, $section_id, $this->year);
-            $d3['class_ave'] = $this->mark->getClassAvg($exam, $class_id, $this->year);
-            $d3['pos'] = $this->mark->getPos($st_id, $exam, $class_id, $section_id, $this->year);
-
-            $this->exam->updateRecord($p, $d3);
-        }
-        /*Exam Record End*/
-
-       return Qs::jsonUpdateOk();
+        $this->exam->updateMark($mk->id, $d);
     }
+
+    /** Sub Position Begin **/
+    foreach ($marks->sortBy('user.name') as $mk) {
+        $d2['sub_pos'] = $this->mark->getSubPos($mk->student_id, $exam, $class_id, $subject_id, $this->year);
+        $this->exam->updateMark($mk->id, $d2);
+    }
+    /*Sub Position End*/
+
+    /* Exam Record Update */
+    unset($p['subject_id']);
+    foreach ($all_st_ids as $st_id) {
+        $p['student_id'] = $st_id;
+        $d3['total'] = $this->mark->getExamTotalTerm($exam, $st_id, $class_id, $this->year);
+        $d3['ave'] = $this->mark->getExamAvgTerm($exam, $st_id, $class_id, $section_id, $this->year);
+        $d3['class_ave'] = $this->mark->getClassAvg($exam, $class_id, $this->year);
+        $d3['pos'] = $this->mark->getPos($st_id, $exam, $class_id, $section_id, $this->year);
+        $this->exam->updateRecord($p, $d3);
+    }
+    /*Exam Record End*/
+
+    return Qs::jsonUpdateOk();
+}
+
 
     public function batch_fix()
     {
